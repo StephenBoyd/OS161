@@ -71,6 +71,22 @@ static const char harvard_copyright[] =
     "Copyright (c) 2000, 2001, 2002, 2003, 2004, 2005, 2008, 2009\n"
     "   President and Fellows of Harvard College.  All rights reserved.\n";
 
+void ducke(){
+	    kprintf("                        __\n");
+	    kprintf("                      /` ,\\__\n");
+	    kprintf("                     |    ).-'\n");
+	    kprintf("                    / .--'\n");
+	    kprintf("                   / /\n");
+	    kprintf("     ,      _.==''`  \\\n");
+	    kprintf("   .'(  _.='         |\n");
+	    kprintf("  {   ``  _.='       |\n");
+	    kprintf("   {    \\`     ;    /\n");
+	    kprintf("    `.   `'=..'  .='\n");
+	    kprintf("      `=._    .='\n");
+	    kprintf("        '-`\\\\`__\n");
+	    kprintf("            `-._{\n");
+	    kprintf("\n");
+}
 
 /*
  * Initial boot sequence.
@@ -135,12 +151,17 @@ boot(void)
 	 */
 	COMPILE_ASSERT(sizeof(userptr_t) == sizeof(char *));
 	COMPILE_ASSERT(sizeof(*(userptr_t)0) == sizeof(char));
+
+	//this should print a duck
+	ducke();
 }
 
 /* practice modifying the kernel for ASST00  */
 #if OPT_A0
 	hello();
 #endif /* OPT_A0 */
+
+
 
 /*
  * Shutdown sequence. Opposite to boot().
