@@ -27,6 +27,7 @@
  * SUCH DAMAGE.
  */
 
+
 #include <types.h>
 #include <kern/errno.h>
 #include <kern/reboot.h>
@@ -44,6 +45,7 @@
 #include "opt-synchprobs.h"
 #include "opt-sfs.h"
 #include "opt-net.h"
+#include "stephen.h"
 
 /*
  * In-kernel menu and command dispatcher.

@@ -1,0 +1,13 @@
+So far I have:
+
+added threadtest4 to the menu
+made a file named threadfun with just a hello world in it
+added threadfun to the config file
+
+types.h before lib.h!!!!!!!!!!!!!!!!!!!!!!!!!
+
+to compile the os, go to depend/name of assignment and:
+pmake depend
+pmake
+pmake install
+

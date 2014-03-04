@@ -145,18 +145,3 @@ threadtest2(int nargs, char **args)
 	return 0;
 }
 
-int
-threadtest4(int nargs, char **args)
-{
-	(void)nargs;
-	(void)args;
-
-	init_sem();
-	kprintf("Starting thread test 4...\n");
-	//write the test here
-	kprintf("The test hasn't been written yet!\n");
-
-	kprintf("\nThread test 4 done. \n");
-
-	return 0;
-}

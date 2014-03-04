@@ -1,0 +1,8 @@
+to add a file or function:
+
+add the file to conf/conf.kern
+run ./config ASST1
+
+add interface to header file in kern/include
+
+
