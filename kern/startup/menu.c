@@ -45,7 +45,7 @@
 #include "opt-synchprobs.h"
 #include "opt-sfs.h"
 #include "opt-net.h"
-#include "stephen.h"
+#include <stephen.h>
 
 /*
  * In-kernel menu and command dispatcher.
@@ -460,6 +460,7 @@ static const char *testmenu[] = {
 	"[tt2] Thread test 2                 ",
 	"[tt3] Thread test 3                 ",
 	"[tt4] Thread test 4                 ",
+  "[utc] Unsafe thread counter         ",
 #if OPT_NET
 	"[net] Network test                  ",
 #endif
@@ -570,6 +571,8 @@ static struct {
 	{ "tt3",	threadtest3 },
 	{ "tt4", threadtest4 },
 	{ "sy1",	semtest },
+  { "utc", unsafethreadcounter },
+
 
 	/* synchronization assignment tests */
 	{ "sy2",	locktest },

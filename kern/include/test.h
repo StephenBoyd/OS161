@@ -56,7 +56,6 @@ int queuetest(int, char **);
 int threadtest(int, char **);
 int threadtest2(int, char **);
 int threadtest3(int, char **);
-int threadtest4(int, char **);
 int semtest(int, char **);
 int locktest(int, char **);
 int cvtest(int, char **);
