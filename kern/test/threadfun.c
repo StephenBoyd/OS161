@@ -8,17 +8,19 @@
 
 static struct semaphore *tsem = NULL;
 
+
 static
 void
 init_sem(void)
 {
   if (tsem==NULL) {
-    tsem = sem_create("tsem", 0);
+    tsem = sem_create("tsem", 1);
     if (tsem == NULL) {
       panic("threadtest: sem create failed\n");
     }
   }
 }
+
 
 void wut(void){
   kprintf("wut ");
@@ -31,7 +33,6 @@ runtt4(int num_threads)
 {
 	char name[16];
 	int i, result;
-
 	for (i=0; i<num_threads; i++) {
 		result = thread_fork(name, NULL,
 				     wut,
@@ -41,7 +42,6 @@ runtt4(int num_threads)
 			      strerror(result));
 		}
 	}
-
 	for (i=0; i<num_threads; i++) {
 		P(tsem);
 	}
@@ -62,6 +62,9 @@ threadtest4(int nargs, char **args)
 	return 0;
 }
 
+
+
+
 int counter = 0;
 
 void countprinter(void * unusedpointer, unsigned long num_increment){
@@ -80,10 +83,9 @@ rununsafe(int num_threads, int num_increment)
 {
 	char name[16];
 	int i, result;
-
 	for (i=0; i<num_threads; i++) {
 		result = thread_fork(name, NULL,
-				     countprinter,  //fix this
+				     countprinter,
 				     NULL, num_increment);
 		if (result) {
 			panic("threadtest: thread_fork failed %s)\n", 
@@ -112,5 +114,59 @@ unsafethreadcounter(int nargs, char **args)
   kprintf("\nThe final number is: %d\n", counter);
 	return 0;
 }
- 
+
+
+
+
+void safecountprinter(void * unusedpointer, unsigned long num_increment){
+  (void) unusedpointer;
+  unsigned long i;
+  P(tsem);
+  for (i=0; i<num_increment; i++){
+//    P(tsem);
+    counter += 1;
+//    V(tsem);
+  }
+  kprintf("\n %d \n", counter);
+  V(tsem);
+}
+
+static
+void
+runsafe(int num_threads, int num_increment)
+{
+	char name[16];
+	int i, result;
+	for (i=0; i<num_threads; i++) {
+		result = thread_fork(name, NULL,
+				     safecountprinter,
+				     NULL, num_increment);
+		if (result) {
+			panic("threadtest: thread_fork failed %s)\n", 
+			      strerror(result));
+		}
+	}
+  counter = 0;
+	for (i=0; i<num_threads; i++) {
+		P(tsem);
+	}
+}
+
+int
+safethreadcounter(int nargs, char **args)
+{
+  int num_threads = atoi(args[1]);
+  int num_increment = atoi(args[2]);
+  if (nargs==3) {
+    init_sem();
+    kprintf("Starting safe thread test...\n");
+    rununsafe(num_threads, num_increment);	
+	  kprintf("\nsafe thread test done. \n");
+  } else {
+    kprintf("\nEnter exactly two integer arguments to use this test\n");
+  }
+  kprintf("\nThe final number is: %d\n", counter);
+	return 0;
+}
+
 

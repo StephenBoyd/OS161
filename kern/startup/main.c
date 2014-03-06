@@ -72,20 +72,20 @@ static const char harvard_copyright[] =
     "   President and Fellows of Harvard College.  All rights reserved.\n";
 
 void ducke(){
-	    kprintf("                        __\n");
-	    kprintf("                      /` ,\\__\n");
-	    kprintf("                     |    ).-'\n");
-	    kprintf("                    / .--'\n");
-	    kprintf("                   / /\n");
-	    kprintf("     ,      _.==''`  \\\n");
-	    kprintf("   .'(  _.='         |\n");
-	    kprintf("  {   ``  _.='       |\n");
-	    kprintf("   {    \\`     ;    /\n");
-	    kprintf("    `.   `'=..'  .='\n");
-	    kprintf("      `=._    .='\n");
-	    kprintf("        '-`\\\\`__\n");
-	    kprintf("            `-._{\n");
-	    kprintf("\n");
+	    kprintf("\033[42m                        __                     \n");
+	    kprintf("                      /` ,\\__                  \n");
+	    kprintf("                     |    ).-'                 \n");
+	    kprintf("                    / .--'                     \n");
+	    kprintf("                   / /                         \n");
+	    kprintf("     ,      _.==''`  \\                         \n");
+	    kprintf("   .'(  _.='         |                         \n");
+	    kprintf("  {   ``  _.='       |                         \n");
+	    kprintf("   {    \\`     ;    /                          \n");
+	    kprintf("    `.   `'=..'  .='                           \n");
+	    kprintf("      `=._    .='                              \n");
+	    kprintf("        '-`\\\\`__                               \n");
+	    kprintf("            `-._{                              \n");
+	    kprintf("\033[0m\n");
 }
 
 /*

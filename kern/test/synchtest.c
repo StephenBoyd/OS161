@@ -68,6 +68,7 @@ cleanitems(void)
 	lock_destroy(testlock);
 	cv_destroy(testcv);
 	sem_destroy(donesem);
+  kprintf("Destruction complete.\n");
 	}
 #endif
 
@@ -139,7 +140,8 @@ semtest(int nargs, char **args)
 	kprintf("Starting semaphore test...\n");
 	kprintf("If this hangs, it's broken: ");
 	P(testsem);
-	P(testsem);
+	kprintf("will this print?");
+  P(testsem);
 	kprintf("ok\n");
 
 	for (i=0; i<NTHREADS; i++) {
@@ -159,14 +161,18 @@ semtest(int nargs, char **args)
 	V(testsem);
 	V(testsem);
 
+  
 #ifdef UW
   cleanitems();
 #endif
 	kprintf("Semaphore test done.\n");
+  //testsem = NULL; //I added this line. Now semtest can run twice.
 	return 0;
 }
 
 static
+
+
 void
 fail(unsigned long num, const char *msg)
 {
