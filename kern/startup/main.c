@@ -84,9 +84,31 @@ void ducke(){
 	    kprintf("    `.   `'=..'  .='                           \n");
 	    kprintf("      `=._    .='                              \n");
 	    kprintf("        '-`\\\\`__                               \n");
-	    kprintf("            `-._{                              \n");
+	    kprintf("\033[5m            `-._{                              \n");
 	    kprintf("\033[0m\n");
 }
+
+void mario(){
+  kprintf("          \033[41m          \033[0m\n");
+  kprintf("        \033[41m                  \033[0m\n");
+  kprintf("        \033[40m      \033[43m    \033[40m  \033[43m  \033[0m\n");
+  kprintf("      \033[40m  \033[43m  \033[40m  \033[43m      \033[40m  \033[43m      \033[0m\n");
+  kprintf("      \033[40m  \033[43m  \033[40m    \033[43m      \033[40m  \033[43m      \033[0m\n");
+  kprintf("      \033[40m    \033[43m        \033[40m        \033[0m\n");
+  kprintf("          \033[43m              \033[0m\n");
+  kprintf("        \033[41m    \033[44m  \033[41m    \033[44m  \033[41m    \033[0m\n");
+  kprintf("      \033[41m      \033[44m  \033[41m    \033[44m  \033[41m      \033[0m\n");
+  kprintf("    \033[41m        \033[44m        \033[41m        \033[0m\n");
+  kprintf("    \033[47m    \033[41m  \033[44m  \033[43m  \033[44m    \033[43m  \033[44m  \033[47m    \033[0m\n");
+  kprintf("    \033[47m      \033[44m            \033[47m      \033[0m\n");
+  kprintf("    \033[47m    \033[44m                \033[47m    \033[0m\n");
+  kprintf("        \033[44m      \033[0m    \033[44m      \033[0m\n");
+  kprintf("      \033[40m      \033[0m        \033[40m      \033[0m\n");
+  kprintf("    \033[40m        \033[0m        \033[40m        \033[0m\n");
+  kprintf("    \033[0m\n");
+}
+
+
 
 /*
  * Initial boot sequence.
@@ -153,7 +175,7 @@ boot(void)
 	COMPILE_ASSERT(sizeof(*(userptr_t)0) == sizeof(char));
 
 	//this should print a duck
-	ducke();
+//	ducke();
 }
 
 /* practice modifying the kernel for ASST00  */
@@ -231,9 +253,8 @@ sys_reboot(int code)
 void
 kmain(char *arguments)
 {
-	boot();
-
+  boot();
+  mario();
 	menu(arguments);
-
 	/* Should not get here */
 }

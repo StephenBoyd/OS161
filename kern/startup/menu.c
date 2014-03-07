@@ -706,7 +706,7 @@ menu(char *args)
 	menu_execute(args, 1);
 
 	while (1) {
-		kprintf("OS/161 kernel [? for menu]: ");
+		kprintf("\033[5m\033[1;33m5OS/161 kernel \033[1;36m[? for menu]: \033[25m\033[0m");
 		kgets(buf, sizeof(buf));
 		menu_execute(buf, 0);
 	}
