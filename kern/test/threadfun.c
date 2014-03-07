@@ -6,25 +6,40 @@
 #include <stephen.h>
 //Stephen Boyd
 
-static struct semaphore *tsem = NULL;
+static struct semaphore *testsem = 0;
+static struct semaphore *donesem = 0;
+static int counter = 0;
 
 
 static
 void
 init_sem(void)
 {
-  if (tsem==NULL) {
-    tsem = sem_create("tsem", 1);
-    if (tsem == NULL) {
-      panic("threadtest: sem create failed\n");
+  if (testsem==NULL) {
+    testsem = sem_create("testsem", 2);
+    if (testsem == NULL) {
+      panic("threadfun: sem create failed\n");
     }
   }
+  if (donesem==NULL) {
+      donesem = sem_create("donesem", 0);
+      if (donesem == NULL) {
+        panic("threadfun: sem_create failed\n");
+      }
+    }
 }
 
+static
+void
+clean(void){
+  sem_destroy(testsem);
+  sem_destroy(donesem);
+}
 
+static
 void wut(void){
   kprintf("wut ");
-  V(tsem);
+  V(testsem);
 }
 
 static
@@ -43,7 +58,7 @@ runtt4(int num_threads)
 		}
 	}
 	for (i=0; i<num_threads; i++) {
-		P(tsem);
+		P(testsem);
 	}
 }
 
@@ -65,8 +80,7 @@ threadtest4(int nargs, char **args)
 
 
 
-int counter = 0;
-
+static
 void countprinter(void * unusedpointer, unsigned long num_increment){
   (void) unusedpointer;
   unsigned long i;
@@ -74,7 +88,7 @@ void countprinter(void * unusedpointer, unsigned long num_increment){
     counter += 1;
   }
   kprintf("\n %d \n", counter);
-  V(tsem);
+  V(testsem);
 }
 
 static
@@ -94,7 +108,7 @@ rununsafe(int num_threads, int num_increment)
 	}
   counter = 0;
 	for (i=0; i<num_threads; i++) {
-		P(tsem);
+		P(testsem);
 	}
 }
 
@@ -121,14 +135,14 @@ unsafethreadcounter(int nargs, char **args)
 void safecountprinter(void * unusedpointer, unsigned long num_increment){
   (void) unusedpointer;
   unsigned long i;
-  P(tsem);
+  (void)unusedpointer;
+  P(testsem);
   for (i=0; i<num_increment; i++){
-//    P(tsem);
     counter += 1;
-//    V(tsem);
   }
+
   kprintf("\n %d \n", counter);
-  V(tsem);
+  V(donesem);
 }
 
 static
@@ -137,6 +151,10 @@ runsafe(int num_threads, int num_increment)
 {
 	char name[16];
 	int i, result;
+  init_sem();
+  P(testsem);
+  P(testsem);
+  kprintf("\nrunsafe()\n");
 	for (i=0; i<num_threads; i++) {
 		result = thread_fork(name, NULL,
 				     safecountprinter,
@@ -147,9 +165,15 @@ runsafe(int num_threads, int num_increment)
 		}
 	}
   counter = 0;
-	for (i=0; i<num_threads; i++) {
-		P(tsem);
+
+  //this is in the working tests, so I put it here.
+  for (i=0; i<num_threads; i++) {
+		V(testsem);
+    P(donesem);
 	}
+  V(testsem);
+  V(testsem);
+  clean();
 }
 
 int
@@ -158,9 +182,8 @@ safethreadcounter(int nargs, char **args)
   int num_threads = atoi(args[1]);
   int num_increment = atoi(args[2]);
   if (nargs==3) {
-    init_sem();
     kprintf("Starting safe thread test...\n");
-    rununsafe(num_threads, num_increment);	
+    runsafe(num_threads, num_increment);	
 	  kprintf("\nsafe thread test done. \n");
   } else {
     kprintf("\nEnter exactly two integer arguments to use this test\n");
