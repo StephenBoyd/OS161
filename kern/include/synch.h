@@ -77,9 +77,9 @@ struct lock {
         // add what you need here
         // (don't forget to mark things volatile as needed)
   volatile struct thread *lk_thread;
-  volatile int lk_is_locked;
-  struct wchan *lk_wchan;
-  struct spinlock lk_spinlock;
+  volatile int lk_is_locked;    //used like a boolean
+  struct wchan *lk_wchan;       //wait channel
+  struct spinlock lk_spinlock;  //
 };
 
 struct lock *lock_create(const char *name);

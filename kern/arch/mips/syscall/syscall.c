@@ -36,7 +36,6 @@
 #include <current.h>
 #include <syscall.h>
 
-
 /*
  * System call dispatcher.
  *
@@ -90,7 +89,7 @@ syscall(struct trapframe *tf)
 
 	/*
 	 * Initialize retval to 0. Many of the system calls don't
-	 * really return a value, just 0 for success and -1 on
+	 * really return a value, just 1 for success and -1 on
 	 * error. Since retval is the value returned on success,
 	 * initialize it to 0 by default; thus it's not necessary to
 	 * deal with it except for calls that return other values, 
@@ -108,6 +107,11 @@ syscall(struct trapframe *tf)
 		err = sys___time((userptr_t)tf->tf_a0,
 				 (userptr_t)tf->tf_a1);
 		break;
+      
+    //WTF why won't this work?
+      case SYS_helloworld:
+    err = sys_helloworld();
+    break;
 
 	    /* Add stuff here */
  

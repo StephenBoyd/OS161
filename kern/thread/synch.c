@@ -85,7 +85,6 @@ sem_destroy(struct semaphore *sem)
 	wchan_destroy(sem->sem_wchan);
         kfree(sem->sem_name);
         kfree(sem);
-  kprintf("sem_destroy complete\n");
 }
 
 void 

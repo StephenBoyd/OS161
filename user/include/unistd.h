@@ -157,6 +157,9 @@ int __getcwd(char *buf, size_t buflen);
 /* stat - see sys/stat.h */
 /* lstat - see sys/stat.h */
 
+// these are simple system calls I added for ASST2
+int sys_helloworld(void);
+
 /*
  * These are not themselves system calls, but wrapper routines in libc.
  */
