@@ -35,6 +35,7 @@ int
 main()
 {
   helloworld();
+  printint(7);
 	return 0;
   _exit(0);
 }

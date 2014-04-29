@@ -20,3 +20,8 @@ int sys_helloworld(void){
   kprintf("\nheeeeeey world\n");
   return 0;
 }
+
+int sys_printint(int value){
+  kprintf("%d\n", value);
+  return 0;
+}

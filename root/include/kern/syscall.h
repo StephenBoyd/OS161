@@ -197,7 +197,7 @@
 #define SYS_reboot       119
 //#define SYS___sysctl   120
 #define SYS_helloworld   121
-//#define SYS__exit        122     SYS__exit is call 3
+#define SYS_printint     122     
 
 /*CALLEND*/
 
