@@ -255,7 +255,6 @@
 /home/boyste04/os161/kern/dev/generic/console.h
 /home/boyste04/os161/kern/dev/generic/console.c
 /home/boyste04/os161/kern/dev/generic/beep.c
-/home/boyste04/os161/kern/userprog/simple_syscalls.h
 /home/boyste04/os161/kern/arch/mips/vm/ram.c
 /home/boyste04/os161/kern/arch/mips/vm/dumbvm.c
 /home/boyste04/os161/kern/arch/mips/thread/cpu.c

@@ -159,6 +159,7 @@ int __getcwd(char *buf, size_t buflen);
 
 // these are simple system calls I added for ASST2
 int helloworld(void);
+void _exit(int code);
 
 /*
  * These are not themselves system calls, but wrapper routines in libc.

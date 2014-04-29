@@ -35,8 +35,6 @@ int
 main()
 {
   helloworld();
-  for (int i = 0; i < 10000 ; i ++) {
-    printf("does this print?");
-  }
 	return 0;
+  _exit(0);
 }
