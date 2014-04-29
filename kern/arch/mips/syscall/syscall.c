@@ -108,7 +108,6 @@ syscall(struct trapframe *tf)
 				 (userptr_t)tf->tf_a1);
 		break;
       
-    //WTF why won't this work?
       case SYS_helloworld:
     err = sys_helloworld();
     break;

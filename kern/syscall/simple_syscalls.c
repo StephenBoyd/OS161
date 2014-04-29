@@ -5,6 +5,8 @@
 #include <copyinout.h>
 #include <syscall.h>
 #include <lib.h>
+#include <kern/unistd.h>
+#include <thread.h>
 
 int sys_helloworld(void){
   kprintf("\nheeeeeey world\n");
