@@ -36,6 +36,8 @@ main()
 {
   helloworld();
   printint(7);
+  char mystring[] = "This is a fine string.\n";
+  printstring (mystring, sizeof(mystring));
 	return 0;
   _exit(0);
 }

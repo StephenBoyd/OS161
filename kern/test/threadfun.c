@@ -87,7 +87,7 @@ void countprinter(void * unusedpointer, unsigned long num_increment){
   for (i=0; i<num_increment; i++){
     counter += 1;
   }
-  kprintf("\n %d \n", counter);
+//  kprintf("\n %d \n", counter);
   V(testsem);
 }
 
@@ -136,13 +136,13 @@ void safecountprinter(void * unusedpointer, unsigned long num_increment){
   (void) unusedpointer;
   unsigned long i;
   (void)unusedpointer;
-  P(testsem);
   for (i=0; i<num_increment; i++){
+    P(donesem);
     counter += 1;
+    V(donesem);
   }
 
   kprintf("\n %d \n", counter);
-  V(donesem);
 }
 
 static

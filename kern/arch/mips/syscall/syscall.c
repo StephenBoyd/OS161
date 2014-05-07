@@ -120,6 +120,14 @@ syscall(struct trapframe *tf)
     err = sys_printint(tf->tf_a0);
     break;
 
+      case SYS_printstring:
+    err = sys_printstring(tf->tf_a0, tf->tf_a1);
+    break;
+
+      case SYS_write:
+    err = sys_write(tf->tf_a0, tf->tf_a1, tf->tf_a2);
+    break;
+
 	    /* Add stuff here */
  
 	    default:

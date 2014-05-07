@@ -59,5 +59,8 @@ int sys_reboot(int code);
 int sys___time(userptr_t user_seconds, userptr_t user_nanoseconds);
 int sys_helloworld(void);
 void sys__exit(int code);
+int sys_printstring(char * string, size_t length);
+int sys_printint(int value);
+int sys_write(int fd, const void* buf, size_t nbytes);
 
 #endif /* _SYSCALL_H_ */
